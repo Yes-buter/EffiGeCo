@@ -42,7 +42,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 <p align="center">
   <img src="demo_pic/efficientvitgeco_result/1.png" width="35%">
 &nbsp; &nbsp; &nbsp;
-  <img src="ademo_pic/geco_result/1.png" width="35%">
+  <img src="demo_pic/geco_result/1.png" width="35%">
 </p>
 <p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
 
@@ -50,6 +50,6 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 <p align="center">
   <img src="demo_pic/efficientvitgeco_result/2.png" width="35%">
 &nbsp; &nbsp; &nbsp;
-  <img src="ademo_pic/geco_result/2.png" width="35%">
+  <img src="demo_pic/geco_result/2.png" width="35%">
 </p>
 <p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
