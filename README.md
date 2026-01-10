@@ -53,4 +53,26 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
   <img src="demo_pic/geco_result/2.png" width="35%">
 </p>
 <p align="center"><em>图 1  左=eff_vit_sam（4044.56 ms模型加载+2075.46 ms模型推理），右=sam（4696.03 ms+3055.34 ms） </em></p>
-设备i9-13900hx + rtx 4060 laptop + win 11
+
+## 运行环境  
+设备：i9-13900HX + RTX 4060 Laptop + Windows 11  
+
+### 关于 GeCo 跨图搜索  
+对 support_img、query_img、support_box 均使用 backbone 提取特征，再将 Prototype Embeddings 注入查询图特征。  
+代码参考：demo_cross.py、geco_infer.py（新增 forward_cross 函数）。  
+![cross_img](pics/crossmodel.jpg)  
+
+### 关于将 efficient_vit_sam 替换 SAM  
+新增 eefficientvitsam_geco_infer.py，结构基本照抄原 geco_infer.py，仅替换 import 以使用新 backbone。  
+新增 efficientvitsam_demo.py，逻辑参考原 demo.py，但 build_model 改为从 models/eefficientvitsam_geco_infer 导入。  
+
+因工程最初不含 EfficientViT-SAM，需将官方仓库置为第三方依赖：  
+官方仓库 mit-han-lab/efficientvit → 放置路径 third_party/efficientvit  
+
+backbone 侧：EfficientViT-SAM 的 image_encoder 使用 512 输入及专用 mean/std，而 GeCo 原默认 1024+ImageNet 参数。  
+在 models/eeefficientvitsam_geco_infer.py 的 EfficientViTSAMBackbone.forward() 中做输入适配：  
+先去 ImageNet 归一化回 [0,1]，resize 到 512，再用 EfficientViT-SAM 的 mean/std 重新归一化后送入 model.image_encoder。  
+
+原 GeCo 结构里除 backbone 外，还有用 SAM 的 prompt_encoder+mask_decoder 进行 refine_bounding_boxes 的后处理阶段，该阶段原代码硬编码加载 sam_vit_h_4b8939.pth。  
+在 models/eefficientvitsam_geco_infer.py 中将 refine 设为可选：若找不到该权重则自动跳过 refine（输出更粗但不报错），并在 efficientvitsam_demo.py 提供参数 --disable_sam_refine 与 --sam_refine_ckpt 供选择。  
+代码参考：models/eefficientvitsam_geco_infer.py、efficientvitsam_demo.py  
