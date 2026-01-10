@@ -60,7 +60,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 ### 关于 GeCo 跨图搜索  
 对 support_img、query_img、support_box 均使用 backbone 提取特征，再将 Prototype Embeddings 注入查询图特征。  
 代码参考：demo_cross.py、geco_infer.py（新增 forward_cross 函数）。  
-![cross_img](pics/crossmodel.jpg)  
+![cross_img](demo_pic/crossmodel.jpg)  
 
 ### 关于将 efficient_vit_sam 替换 SAM  
 新增 eefficientvitsam_geco_infer.py，结构基本照抄原 geco_infer.py，仅替换 import 以使用新 backbone。  
