@@ -37,3 +37,19 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 1. 确保已下载 `GeCo.pth` 与 `efficientvit_sam_l1.pt`  
 2. 运行根目录 `efficientvitsam_demo.py`  
 3. 选择图片 → 框选示例 → 关闭窗口 → 查看结果
+
+<!-- 第一组 -->
+<p align="center">
+  <img src="demo_pic/efficientvitgeco_result/1.png" width="45%">
+&nbsp; &nbsp; &nbsp;
+  <img src="ademo_pic/geco_result/1.png" width="45%">
+</p>
+<p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
+
+<!-- 第一组 -->
+<p align="center">
+  <img src="demo_pic/efficientvitgeco_result/2.png" width="45%">
+&nbsp; &nbsp; &nbsp;
+  <img src="ademo_pic/geco_result/2.png" width="45%">
+</p>
+<p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
