@@ -44,7 +44,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 &nbsp; &nbsp; &nbsp;
   <img src="demo_pic/geco_result/1.png" width="35%">
 </p>
-<p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
+<p align="center"><em>图 1  左=eff_vit_sam(3717.88 ms模型加载+2102.95模型推理)，右=sam（4961.88 ms+2659.98 ms） </em></p>
 
 <!-- 第一组 -->
 <p align="center">
@@ -52,4 +52,5 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 &nbsp; &nbsp; &nbsp;
   <img src="demo_pic/geco_result/2.png" width="35%">
 </p>
-<p align="center"><em>图 1  左=eff_vit_sam，右=sam </em></p>
+<p align="center"><em>图 1  左=eff_vit_sam（4044.56 ms模型加载+2075.46 ms模型推理），右=sam（4696.03 ms+3055.34 ms） </em></p>
+设备i9-13900hx + rtx 4060 laptop + win 11
