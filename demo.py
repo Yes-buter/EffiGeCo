@@ -11,6 +11,7 @@ from utils.data import resize_and_pad
 import matplotlib.pyplot as plt
 import os
 import sys
+import time
 
 try:
     import tkinter as tk
@@ -104,6 +105,7 @@ def demo(args):
     else:
         device = torch.device("cpu")
 
+    load_t0 = time.perf_counter()
     model = DataParallel(
         build_model(args).to(device),
         device_ids=[gpu] if torch.cuda.is_available() else None,
@@ -112,8 +114,11 @@ def demo(args):
     model.load_state_dict(
         torch.load('GeCo.pth', weights_only=True)['model'], strict=False,
     )
-
     model.eval()
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+    load_t1 = time.perf_counter()
+    print(f"[Timing] Model load: {(load_t1 - load_t0) * 1000:.2f} ms")
 
     image =  T.ToTensor()(Image.open(img_path).convert("RGB"))
 
@@ -136,7 +141,14 @@ def demo(args):
     img = T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img).unsqueeze(0).to(device)
     bboxes = bboxes.unsqueeze(0).to(device)
 
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+    infer_t0 = time.perf_counter()
     outputs, _, _, _, masks = model(img, bboxes)
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+    infer_t1 = time.perf_counter()
+    print(f"[Timing] Model inference (forward): {(infer_t1 - infer_t0) * 1000:.2f} ms")
     del _
     idx = 0
     thr = 4
