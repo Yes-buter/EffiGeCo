@@ -1,4 +1,4 @@
-# Some-Changes-on-GeCo
+# GeCo_CrossSearch_EfficientVitSam
 
 GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样本目标计数与检测模型。  
 本仓库在 GeCo 基础上进行以下改动：
