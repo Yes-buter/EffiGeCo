@@ -4,7 +4,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 本仓库在 GeCo 基础上进行以下改动：
 
 1. 新增**跨图搜索**能力  
-2. 将 backbone 替换为 [EfficientViT-SAM](https://github.com/mit-han-lab/efficientvit)，性能提升  
+2. 将 backbone 替换为 [EfficientViT-SAM](https://github.com/mit-han-lab/efficientvit)，速度提升  
 3. 未完待续…
 
 ---
@@ -63,6 +63,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 ![cross_img](demo_pic/crossmodel.jpg)  
 
 ### 关于将 efficient_vit_sam 替换 SAM  
+修改后的模型精度下降，速度上升，后续将会在其他类型的数据，其他efficientvitsam的权重上进行对比。
 新增 eefficientvitsam_geco_infer.py，结构基本照抄原 geco_infer.py，仅替换 import 以使用新 backbone。  
 新增 efficientvitsam_demo.py，逻辑参考原 demo.py，但 build_model 改为从 models/eefficientvitsam_geco_infer 导入。  
 
