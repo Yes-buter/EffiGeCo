@@ -12,7 +12,7 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 ## 环境
 - Python 3.10  
 - CUDA 12.1  
-- torch、torchvision、torchaudio  
+- torch 2.5.1、torchvision、torchaudio  
 - matplotlib  
 
 ---
