@@ -3,9 +3,8 @@
 GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样本目标计数与检测模型。  
 本仓库在 GeCo 基础上进行以下改动：
 
-1. 新增**跨图搜索**能力  
-2. 将 backbone 替换为 [EfficientViT-SAM](https://github.com/mit-han-lab/efficientvit)，速度提升  
-3. 未完待续…
+新增**跨图搜索**能力  
+将 backbone 替换为 [EfficientViT-SAM](https://github.com/mit-han-lab/efficientvit)，速度提升  
 
 ---
 
