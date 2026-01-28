@@ -118,7 +118,7 @@ python efficientvitsam_demo.py
 
 #### A. 性能与策略
 
-* **精度/速度权衡**：推理速度显著上升，精度略有下降（但在大多数计数场景下可接受）。
+* **精度/速度权衡**：推理速度显著上升，精度略有下降。
 * **第三方依赖**：引入 `mit-han-lab/efficientvit` 到 `third_party/efficientvit` 目录。
 
 #### B. 核心代码变更
