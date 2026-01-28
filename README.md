@@ -1,4 +1,4 @@
-# GeCo-CrossSearch-EfficientVitSam
+# EffiGeCo
 
 这是一个基于 [GeCo](https://github.com/jerpelhan/GeCo) (Generative Count) 的改进版本，主要针对**跨图检索能力**与**推理速度**进行了优化。
 
