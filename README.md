@@ -62,18 +62,40 @@ GeCo（[原仓库](https://github.com/jerpelhan/GeCo)）是一个强大的少样
 代码参考：demo_cross.py、geco_infer.py（新增 forward_cross 函数）。  
 ![cross_img](demo_pic/crossmodel.jpg)  
 
-### 关于将 efficient_vit_sam 替换 SAM  
-修改后的模型精度下降，速度上升，后续将会在其他类型的数据，其他efficientvitsam的权重上进行对比。
-新增 eefficientvitsam_geco_infer.py，结构基本照抄原 geco_infer.py，仅替换 import 以使用新 backbone。  
-新增 efficientvitsam_demo.py，逻辑参考原 demo.py，但 build_model 改为从 models/eefficientvitsam_geco_infer 导入。  
+### ⚡️ 关于将 SAM 替换为 EfficientViT-SAM
 
-因工程最初不含 EfficientViT-SAM，需将官方仓库置为第三方依赖：  
-官方仓库 mit-han-lab/efficientvit → 放置路径 third_party/efficientvit  
+#### 1. 性能变更 (Performance)
 
-backbone 侧：EfficientViT-SAM 的 image_encoder 使用 512 输入及专用 mean/std，而 GeCo 原默认 1024+ImageNet 参数。  
-在 models/eeefficientvitsam_geco_infer.py 的 EfficientViTSAMBackbone.forward() 中做输入适配：  
-先去 ImageNet 归一化回 [0,1]，resize 到 512，再用 EfficientViT-SAM 的 mean/std 重新归一化后送入 model.image_encoder。  
+* **精度/速度权衡**：修改后的模型推理速度显著上升，但精度略有下降。
+* **后续计划**：后续将在其他类型的数据集以及 EfficientViT-SAM 的其他权重版本上进行进一步的对比测试。
 
-原 GeCo 结构里除 backbone 外，还有用 SAM 的 prompt_encoder+mask_decoder 进行 refine_bounding_boxes 的后处理阶段，该阶段原代码硬编码加载 sam_vit_h_4b8939.pth。  
-在 models/eefficientvitsam_geco_infer.py 中将 refine 设为可选：若找不到该权重则自动跳过 refine（输出更粗但不报错），并在 efficientvitsam_demo.py 提供参数 --disable_sam_refine 与 --sam_refine_ckpt 供选择。  
-代码参考：models/eefficientvitsam_geco_infer.py、efficientvitsam_demo.py  
+#### 2. 代码变更 (Code Changes)
+
+* **新增文件**：
+* `efficientvitsam_geco_infer.py`：结构源自原 `geco_infer.py`，主要修改了 import 部分以适配新 Backbone。
+* `efficientvitsam_demo.py`：逻辑参考原 `demo.py`，将 `build_model` 指向新的 `models/efficientvitsam_geco_infer`。
+
+
+* **第三方依赖**：
+* 因工程初始不包含 EfficientViT-SAM，需引入官方仓库作为依赖：
+* `mit-han-lab/efficientvit` → `third_party/efficientvit`
+
+
+
+#### 3. 核心实现细节 (Implementation Details)
+
+**Backbone 输入适配**
+GeCo 默认使用 1024 分辨率及 ImageNet 归一化参数，而 EfficientViT-SAM 的 `image_encoder` 需要 512 输入及专用 mean/std。
+
+* **适配逻辑**：在 `models/efficientvitsam_geco_infer.py` 的 `EfficientViTSAMBackbone.forward()` 中：
+1. 先将输入反归一化回 `[0,1]` 并 Resize 到 512；
+2. 使用 EfficientViT-SAM 专用的 mean/std 重新归一化后送入模型。
+
+
+
+**Refine 阶段优化**
+原 GeCo 包含基于 SAM (`prompt_encoder` + `mask_decoder`) 的 `refine_bounding_boxes` 后处理阶段，且原代码硬编码加载 `sam_vit_h_4b8939.pth`。
+
+* **改进**：在 `efficientvitsam_geco_infer.py` 中将 Refine 设为可选模块。
+* **自动跳过**：若找不到权重文件，则自动跳过 Refine 阶段（仅输出粗略结果，不报错）。
+* **参数控制**：`efficientvitsam_demo.py` 新增参数 `--disable_sam_refine` 与 `--sam_refine_ckpt` 以支持灵活配置。
