@@ -20,7 +20,6 @@
 
 ### 安装依赖
 
-```bash
 # 使用 uv 安装（推荐）
 uv pip install --python "&lt;你的虚拟环境路径&gt;\Scripts\python.exe" -e "&lt;你的项目路径&gt;\third_party\efficientvit"
 
