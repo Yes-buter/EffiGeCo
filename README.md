@@ -92,34 +92,34 @@ python efficientvitsam_demo_iter.py
 
 <table align="center">
 <tr>
-<td align="center"><img src="请在此处填入图片1路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/1.png" width="100%">
 
 
 
 Sample 1</td>
-<td align="center"><img src="请在此处填入图片2路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/2.png" width="100%">
 
 
 
 Sample 2</td>
-<td align="center"><img src="请在此处填入图片3路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/3.png" width="100%">
 
 
 
 Sample 3</td>
 </tr>
 <tr>
-<td align="center"><img src="请在此处填入图片4路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/4.png" width="100%">
 
 
 
 Sample 4</td>
-<td align="center"><img src="请在此处填入图片5路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/5.png" width="100%">
 
 
 
 Sample 5</td>
-<td align="center"><img src="请在此处填入图片6路径.png" width="100%">
+<td align="center"><img src="demo_pic/iter_result/6.png" width="100%">
 
 
 
