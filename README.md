@@ -15,18 +15,26 @@
 * **Python**: 3.10
 * **CUDA**: 12.1
 * **Core Libraries**:
-  * `torch==2.5.1`, `torchvision`, `torchaudio`
-  * `matplotlib`
+* `torch==2.5.1`, `torchvision`, `torchaudio`
+* `matplotlib`
+
+
 
 ### 安装依赖
 
-# 使用 uv 安装（推荐）
-uv pip install --python "&lt;你的虚拟环境路径&gt;\Scripts\python.exe" -e "&lt;你的项目路径&gt;\third_party\efficientvit"
+**使用 uv 安装（推荐）**
 
-# 示例（请替换为实际路径）
-uv pip install --python "C:\Users\&lt;用户名&gt;\...\Scripts\python.exe" -e "...\third_party\efficientvit"
+```bash
+uv pip install --python "<你的虚拟环境路径>\Scripts\python.exe" -e "<你的项目路径>\third_party\efficientvit"
 
+```
 
+**示例（请替换为实际路径）**
+
+```bash
+uv pip install --python "C:\Users\<用户名>\...\Scripts\python.exe" -e "...\third_party\efficientvit"
+
+```
 
 > **测试硬件**: Intel i9-13900HX + NVIDIA RTX 4060 Laptop
 
@@ -57,7 +65,7 @@ python demo_cross.py
 
 **操作流程**: 运行脚本 → 在弹窗中选择**支持图 (Query)** → 框选目标物体 → 关闭窗口 → 查看结果。
 
-### 2. EfficientViT-SAM 加速推理
+### 2. EfficientViT-SAM 加速推理 (Standard)
 
 体验替换 Backbone 后的高速推理版本。
 
@@ -69,6 +77,55 @@ python efficientvitsam_demo.py
 ```
 
 **操作流程**: 运行脚本 → 选择图片 → 框选示例 → 关闭窗口 → 查看结果。
+
+### 3. 迭代优化模式 (Iterative Refinement)
+
+针对复杂场景，使用迭代模式可以通过多次（默认 3 次）Refinement 显著提高 Top-K 的准确率。
+
+```bash
+python efficientvitsam_demo_iter.py
+
+```
+
+**效果展示**:
+下图展示了 6 个不同样本在经过 3 次迭代后的效果，可见模型对目标的定位更加精准。
+
+<table align="center">
+<tr>
+<td align="center"><img src="请在此处填入图片1路径.png" width="100%">
+
+
+
+Sample 1</td>
+<td align="center"><img src="请在此处填入图片2路径.png" width="100%">
+
+
+
+Sample 2</td>
+<td align="center"><img src="请在此处填入图片3路径.png" width="100%">
+
+
+
+Sample 3</td>
+</tr>
+<tr>
+<td align="center"><img src="请在此处填入图片4路径.png" width="100%">
+
+
+
+Sample 4</td>
+<td align="center"><img src="请在此处填入图片5路径.png" width="100%">
+
+
+
+Sample 5</td>
+<td align="center"><img src="请在此处填入图片6路径.png" width="100%">
+
+
+
+Sample 6</td>
+</tr>
+</table>
 
 ---
 
@@ -118,7 +175,6 @@ python efficientvitsam_demo.py
 原理是对 `support_img` (查询图)、`query_img` (被搜图) 和 `support_box` 均使用 Backbone 提取特征，然后将 Prototype Embeddings 注入到查询图特征中。
 
 * **核心代码**: `models/geco_infer.py` (新增 `forward_cross` 函数)
-* **架构示意**:
 
 ### 2. EfficientViT-SAM 替换方案
 
