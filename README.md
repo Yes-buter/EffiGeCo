@@ -15,8 +15,17 @@
 * **Python**: 3.10
 * **CUDA**: 12.1
 * **Core Libraries**:
-* `torch==2.5.1`, `torchvision`, `torchaudio`
-* `matplotlib`
+  * `torch==2.5.1`, `torchvision`, `torchaudio`
+  * `matplotlib`
+
+### 安装依赖
+
+```bash
+# 使用 uv 安装（推荐）
+uv pip install --python "&lt;你的虚拟环境路径&gt;\Scripts\python.exe" -e "&lt;你的项目路径&gt;\third_party\efficientvit"
+
+# 示例（请替换为实际路径）
+uv pip install --python "C:\Users\&lt;用户名&gt;\...\Scripts\python.exe" -e "...\third_party\efficientvit"
 
 
 
